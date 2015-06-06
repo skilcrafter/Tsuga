@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="life.tsuga.tsuga" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application
+        android:name="life.tsuga.tsuga.TsugaApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/MyTheme" >
+
+        <activity
+            android:name="life.tsuga.tsuga.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.LoginActivity"
+            android:label="@string/title_activity_login"
+             >
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:parentActivityName="life.tsuga.tsuga.LoginActivity"
+            >
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.EditFriendsActivity"
+            android:label="@string/title_activity_edit_friends"
+            android:launchMode="singleTop"
+            android:parentActivityName="life.tsuga.tsuga.MainActivity"
+             >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.PostActivity"
+            android:label="@string/title_activity_post"
+            android:parentActivityName="life.tsuga.tsuga.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.PlacesActivity"
+            android:label="@string/title_activity_places"
+            android:parentActivityName="life.tsuga.tsuga.PostActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.PostActivity" />
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.EventDetailActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="life.tsuga.tsuga.MainActivity"
+             >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+
+                android:value="life.tsuga.tsuga.MainActivity" />
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.EventMap"
+            android:label="@string/app_name"
+            android:parentActivityName="life.tsuga.tsuga.EventDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.EventDetailActivity" />
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.StreetView"
+            android:label="@string/app_name"
+            android:parentActivityName="life.tsuga.tsuga.EventDetailActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.EventDetailActivity"
+                />
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.ForgotPassword"
+            android:label="@string/title_activity_forgot_password"
+            android:parentActivityName="life.tsuga.tsuga.LoginActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.LoginActivity" />
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.UserData"
+            android:label="@string/title_activity_user_data"
+            android:parentActivityName="life.tsuga.tsuga.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.MainActivity" />
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCFgivvVdSZg87-jPUETsYmbvmmBg-2IKA" />
+
+        <activity
+            android:name="life.tsuga.tsuga.FavoriteEventDetail"
+            android:label="@string/title_activity_favorite_event_detail"
+            android:parentActivityName="life.tsuga.tsuga.FavoritesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.FavoritesActivity" />
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.FavoritesActivity"
+            android:label="@string/title_activity_favorites"
+            android:parentActivityName="life.tsuga.tsuga.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.SearchFriendsActivity"
+            android:label="@string/title_activity_search_friends"
+            android:launchMode="singleTop"
+            android:parentActivityName="life.tsuga.tsuga.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.MainActivity" />
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.AllUsersActivity"
+            android:label="@string/title_activity_all_users" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="life.tsuga.tsuga.FriendDetailActivity"
+            android:label="@string/title_activity_friend_detail"
+            android:parentActivityName="life.tsuga.tsuga.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.MainActivity" />
+        </activity>
+
+    </application>
+
+</manifest>

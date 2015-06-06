@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                tools:context="life.tsuga.tsuga.FavoriteEventDetail"
+                android:background="#ffff6311">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@android:color/white">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:context="life.tsuga.tsuga.FavoriteEventDetail">
+
+                    <ImageView
+                        android:id="@+id/eventDetailImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitCenter"
+                        android:layout_alignParentTop="true"
+                        android:adjustViewBounds="true"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:paddingRight="2dp"
+                        android:paddingLeft="2dp"/>
+
+                    <TextView
+                        android:id="@+id/eventTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_below="@+id/eventDetailImageView"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="2dp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:id="@+id/commentTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_below="@+id/eventTextView"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="3dp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:id="@+id/placeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_below="@+id/commentTextView"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="3dp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:id="@+id/addressTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/tsuga_orange"
+                        android:layout_below="@+id/placeTextView"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="3dp"
+                        android:layout_marginBottom="5dp"
+                        android:onClick="onClick"
+                        android:clickable="true"/>
+
+                    <Button
+                        android:id="@+id/StreetViewButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/buttoncustommedium"
+                        android:layout_marginLeft="4dp"
+                        android:textSize="22sp"
+                        android:text="@string/title_activity_street_view"
+                        android:layout_below="@+id/addressTextView"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:id="@+id/phoneNumberTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_below="@+id/StreetViewButton"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="2dp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:id="@+id/websiteTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/tsuga_orange"
+                        android:layout_below="@+id/phoneNumberTextView"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:onClick="onClick"
+                        android:clickable="true"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="2dp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:id="@+id/postedByTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_below="@+id/websiteTextView"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="2dp"
+                        android:paddingRight="2dp"
+                        android:text="@string/submitted_by"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:id="@+id/submitterTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_toRightOf="@id/postedByTextView"
+                        android:layout_below="@id/websiteTextView"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="2dp"
+                        android:layout_marginBottom="5dp"/>
+
+                    <Button
+                        android:id="@+id/deleteEventButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/buttoncustomsmall"
+                        android:textSize="20sp"
+                        android:text="@string/delete"
+                        android:layout_gravity="bottom"
+                        android:layout_below="@id/postedByTextView"
+                        android:layout_marginLeft="4dp"
+                        android:paddingTop="2dp"
+                        android:layout_marginBottom="50dp"
+                        android:layout_marginTop="20dp"/>
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/progressBar"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/attributesView"
+            android:background="@drawable/powered_by_google_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="2dp"/>
+
+</RelativeLayout>

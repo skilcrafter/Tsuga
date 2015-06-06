@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="2dp"
+    android:paddingTop="2dp"
+    tools:context="life.tsuga.tsuga.LoginActivity"
+    android:background="#ffff6311">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="life.tsuga.tsuga.LoginActivity"
+        android:id="@+id/activity_login"
+        android:background="@android:color/white">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp">
+
+                <ImageView
+                    android:id="@+id/friendImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:adjustViewBounds="true"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"/>
+
+                <TextView
+                    android:id="@+id/friendNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@+id/friendImage"/>
+
+                <TextView
+                    android:id="@+id/friendLocationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@+id/friendNameText"/>
+
+                <Button
+                    android:id="@+id/saveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/buttoncustommedium"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:textSize="22sp"
+                    android:text="@string/follow_user_button"
+                    android:layout_below="@id/friendLocationText"
+                    android:visibility="invisible"/>
+
+                <Button
+                    android:id="@+id/deletButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/buttoncustommedium"
+                    android:layout_marginLeft="2dp"
+                    android:textSize="18sp"
+                    android:text="@string/stop_following_user_button"
+                    android:layout_below="@id/saveButton"
+                    android:visibility="invisible"/>
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressBar"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
+
