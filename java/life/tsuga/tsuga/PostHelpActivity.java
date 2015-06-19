@@ -20,6 +20,5 @@ public class PostHelpActivity extends Activity {
         ImageView mapimageview = (ImageView)findViewById(R.id.mapImage);
         Drawable mapRes = getResources().getDrawable(R.drawable.instruction_map);
         mapimageview.setImageDrawable(mapRes);
-
    }
 }
