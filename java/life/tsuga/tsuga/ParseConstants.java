@@ -12,6 +12,7 @@ public final class ParseConstants {
     public static final String KEY_CURRENT_USERNAME = "username";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_EVENT = "event";
+    public static final String KEY_EXAMPLE_PERSON = "qq2o1qF7ND";
     public static final String KEY_FILE_TYPE = "fileType";
     public static final String KEY_FRIENDS_RELATION = "friendsRelation";
     public static final String KEY_IMAGE = "image";
@@ -27,5 +28,6 @@ public final class ParseConstants {
     public static final String KEY_USERNAME = "userName";
     public static final String KEY_WEBSITE = "website";
     public static final String TYPE_IMAGE="image";
+
 
 }

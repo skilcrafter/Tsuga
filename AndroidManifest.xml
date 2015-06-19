@@ -18,110 +18,96 @@
         android:required="true" />
 
     <application
-        android:name="life.tsuga.tsuga.TsugaApplication"
+        android:name=".TsugaApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/MyTheme" >
-
         <activity
-            android:name="life.tsuga.tsuga.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.LoginActivity"
-            android:label="@string/title_activity_login"
-             >
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" >
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.SignUpActivity"
+            android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up"
-            android:parentActivityName="life.tsuga.tsuga.LoginActivity"
-            >
+            android:parentActivityName=".LoginActivity" >
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.EditFriendsActivity"
+            android:name=".EditFriendsActivity"
             android:label="@string/title_activity_edit_friends"
             android:launchMode="singleTop"
-            android:parentActivityName="life.tsuga.tsuga.MainActivity"
-             >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.MainActivity" />
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.PostActivity"
+            android:name=".PostActivity"
             android:label="@string/title_activity_post"
-            android:parentActivityName="life.tsuga.tsuga.MainActivity"
-            android:screenOrientation="portrait">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.MainActivity" />
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.PlacesActivity"
+            android:name=".PlacesActivity"
             android:label="@string/title_activity_places"
-            android:parentActivityName="life.tsuga.tsuga.PostActivity">
+            android:parentActivityName=".PostActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.PostActivity" />
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.EventDetailActivity"
+            android:name=".EventDetailActivity"
             android:label="@string/app_name"
-            android:parentActivityName="life.tsuga.tsuga.MainActivity"
-             >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-
                 android:value="life.tsuga.tsuga.MainActivity" />
+
             <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.LAUNCHER" />
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.EventMap"
+            android:name=".EventMap"
             android:label="@string/app_name"
-            android:parentActivityName="life.tsuga.tsuga.EventDetailActivity">
+            android:parentActivityName=".EventDetailActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.EventDetailActivity" />
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.StreetView"
+            android:name=".StreetView"
             android:label="@string/app_name"
-            android:parentActivityName="life.tsuga.tsuga.EventDetailActivity" >
+            android:parentActivityName=".EventDetailActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="life.tsuga.tsuga.EventDetailActivity"
-                />
+                android:value="life.tsuga.tsuga.EventDetailActivity" />
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.ForgotPassword"
+            android:name=".ForgotPassword"
             android:label="@string/title_activity_forgot_password"
-            android:parentActivityName="life.tsuga.tsuga.LoginActivity" >
+            android:parentActivityName=".LoginActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.LoginActivity" />
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.UserData"
+            android:name=".UserData"
             android:label="@string/title_activity_user_data"
-            android:parentActivityName="life.tsuga.tsuga.MainActivity"
-            android:screenOrientation="portrait">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.MainActivity" />
@@ -135,57 +121,61 @@
             android:value="AIzaSyCFgivvVdSZg87-jPUETsYmbvmmBg-2IKA" />
 
         <activity
-            android:name="life.tsuga.tsuga.FavoriteEventDetail"
+            android:name=".FavoriteEventDetail"
             android:label="@string/title_activity_favorite_event_detail"
-            android:parentActivityName="life.tsuga.tsuga.FavoritesActivity" >
+            android:parentActivityName=".FavoritesActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.FavoritesActivity" />
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.FavoritesActivity"
+            android:name=".FavoritesActivity"
             android:label="@string/title_activity_favorites"
-            android:parentActivityName="life.tsuga.tsuga.MainActivity" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.MainActivity" />
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.SearchFriendsActivity"
+            android:name=".SearchFriendsActivity"
             android:label="@string/title_activity_search_friends"
             android:launchMode="singleTop"
-            android:parentActivityName="life.tsuga.tsuga.MainActivity" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.MainActivity" />
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.AllUsersActivity"
+            android:name=".AllUsersActivity"
             android:label="@string/title_activity_all_users" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.MainActivity" />
         </activity>
-
         <activity
-            android:name="life.tsuga.tsuga.FriendDetailActivity"
+            android:name=".FriendDetailActivity"
             android:label="@string/title_activity_friend_detail"
-            android:parentActivityName="life.tsuga.tsuga.MainActivity"
-            android:screenOrientation="portrait">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="life.tsuga.tsuga.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".PostHelpActivity"
+            android:label="@string/title_activity_post_help"
+            android:parentActivityName=".PostActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="life.tsuga.tsuga.PostActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -61,7 +61,6 @@ public class FriendDetailActivity extends Activity {
 
     }
 
-
     private void detail() {
         final Intent intent = getIntent();
         mFriendID = intent.getExtras().getString("eventId");
@@ -93,7 +92,6 @@ public class FriendDetailActivity extends Activity {
 
 
         });
-
 
         mCurrentUser = ParseUser.getCurrentUser();
         mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);

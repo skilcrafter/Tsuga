@@ -123,7 +123,15 @@
                         android:text="@string/sign_up_button_label"
                         android:layout_below="@+id/locationField"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="75dp"/>
+                        android:layout_marginTop="75dp"
+                        android:layout_marginBottom="6dp"/>
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/progressBar"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"/>
 
                 </RelativeLayout>
             </LinearLayout>

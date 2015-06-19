@@ -41,6 +41,7 @@ public class EventDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
         mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
+
     }
 
     protected void onResume(){
@@ -60,9 +61,7 @@ public class EventDetailActivity extends Activity {
         query.getInBackground(mEventID, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject parseObject, ParseException e) {
-                mProgressBar.setVisibility(View.INVISIBLE);
-                if (e == null) {
-
+                 if (e == null) {
 
                     Uri fileUri = Uri.parse((parseObject.getParseFile(ParseConstants.KEY_IMAGE)).getUrl());
 
@@ -94,6 +93,8 @@ public class EventDetailActivity extends Activity {
                     phoneNumberView.setText(phoneNumber);
                     websiteView.setText(mWebsite);
                     submitterView.setText(submitter);
+
+                    mProgressBar.setVisibility(View.INVISIBLE);
 
                 } else {
                     Log.e(TAG, e.getMessage());

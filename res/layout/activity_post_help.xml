@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                tools:context="life.tsuga.tsuga.PostHelpActivity"
+                android:background="#ffff6311">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@android:color/white">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                xmlns:tools="http://schemas.android.com/tools"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                tools:context="life.tsuga.tsuga.PostActivity">
+
+                    <ImageView
+                            android:id="@+id/postImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginBottom="6dp"
+                            android:adjustViewBounds="true"/>
+
+                    <ImageView
+                        android:id="@+id/mapImage"
+                        android:layout_below="@+id/postImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:adjustViewBounds="true"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+         </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package life.tsuga.tsuga;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,15 +11,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
@@ -28,7 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class SignUpActivity extends ActionBarActivity {
+public class SignUpActivity extends Activity {
 
     protected EditText mUsername;
     protected EditText mPassword;
@@ -40,6 +44,9 @@ public class SignUpActivity extends ActionBarActivity {
     public Uri mImageUri;
     protected String mFileType = "image";
     protected ParseUser mCurrentUser;
+    protected ProgressBar mProgressBar;
+    protected ParseRelation<ParseUser> mFriendsRelation;
+    protected ParseUser mExampleUser;
 
     public static final int TAKE_PHOTO_REQUEST = 0;
     public static final int PICK_PHOTO_REQUEST = 1;
@@ -49,6 +56,8 @@ public class SignUpActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.INVISIBLE);
 
         if (isNetworkAvailable()){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -61,6 +70,17 @@ public class SignUpActivity extends ActionBarActivity {
             AlertDialog alert = builder.create();
             alert.show();
         }
+
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("objectId",ParseConstants.KEY_EXAMPLE_PERSON);
+        query.getFirstInBackground(new GetCallback<ParseUser>() {
+            public void done(ParseUser user, ParseException e) {
+                if (e == null) {
+                    mExampleUser = user;
+                  }
+            }
+        });
 
         mUsername = (EditText)findViewById(R.id.usernameField);
         mPassword = (EditText)findViewById(R.id.passwordField);
@@ -84,6 +104,8 @@ public class SignUpActivity extends ActionBarActivity {
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressBar.setVisibility(View.VISIBLE);
+
                 String username = mUsername.getText().toString();
                 String password = mPassword.getText().toString();
                 String email = mEmail.getText().toString();
@@ -96,47 +118,66 @@ public class SignUpActivity extends ActionBarActivity {
                 name = name.trim();
                 location = location.trim();
 
-                if(mImageUri==null || username.isEmpty() || password.isEmpty() || email.isEmpty() || name.isEmpty() || location.isEmpty()){
-                    AlertDialog.Builder builder= new AlertDialog.Builder(SignUpActivity.this);
+                if (mImageUri == null || username.isEmpty() || password.isEmpty() || email.isEmpty() || name.isEmpty() || location.isEmpty()) {
+                    mProgressBar.setVisibility(View.INVISIBLE);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                     builder.setMessage(R.string.sign_up_error_message)
                             .setTitle(R.string.sign_up_error_title)
                             .setPositiveButton(android.R.string.ok, null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                }
-                else {
+                } else {
                     ParseUser newUser = new ParseUser();
                     newUser.setUsername(username);
                     newUser.setPassword(password);
                     newUser.setEmail(email);
                     newUser.put("name", name);
-                    newUser.put("location",location);
+                    newUser.put("location", location);
 
                     newUser.signUpInBackground(new SignUpCallback() {
                         @Override
                         public void done(ParseException e) {
-                          if (e == null){
-                                if (mImageUri!= null) {
-                                    byte[]fileBytes = FileHelper.getByteArrayFromFile(SignUpActivity.this, mImageUri);
+                            if (e == null) {
+                                if (mImageUri != null) {
+                                    Toast.makeText(SignUpActivity.this, R.string.signup_wait, Toast.LENGTH_LONG).show();
+
+                                    byte[] fileBytes = FileHelper.getByteArrayFromFile(SignUpActivity.this, mImageUri);
                                     fileBytes = FileHelper.reduceImageForUpload(fileBytes);
-                                    String fileName = FileHelper.getFileName(SignUpActivity.this, mImageUri,mFileType);
+                                    String fileName = FileHelper.getFileName(SignUpActivity.this, mImageUri, mFileType);
                                     ParseFile file = new ParseFile(fileName, fileBytes);
 
-                                    byte[]tMFileBytes = TMFileHelper.getByteArrayFromFile(SignUpActivity.this, mImageUri);
+                                    byte[] tMFileBytes = TMFileHelper.getByteArrayFromFile(SignUpActivity.this, mImageUri);
                                     tMFileBytes = TMFileHelper.reduceImageForUpload(tMFileBytes);
-                                    String tMFileName = FileHelper.getFileName(SignUpActivity.this, mImageUri,mFileType);
+                                    String tMFileName = FileHelper.getFileName(SignUpActivity.this, mImageUri, mFileType);
                                     final ParseFile tMFile = new ParseFile(tMFileName, tMFileBytes);
                                     mCurrentUser = ParseUser.getCurrentUser();
-                                    mCurrentUser.put(ParseConstants.KEY_IMAGE,file);
+                                    mCurrentUser.put(ParseConstants.KEY_IMAGE, file);
                                     mCurrentUser.put(ParseConstants.KEY_THUMBNAILIMAGE, tMFile);
                                     mCurrentUser.saveInBackground(new SaveCallback() {
                                         @Override
                                         public void done(ParseException e) {
                                             if (e == null) {
+                                                mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
+                                                mFriendsRelation.add(mCurrentUser);
+                                                mFriendsRelation.add(mExampleUser);
+                                                mCurrentUser.saveInBackground(new SaveCallback() {
+                                                    @Override
+                                                    public void done(ParseException e) {
+
+                                                    }
+                                                });
+
+                                                mProgressBar.setVisibility(View.INVISIBLE);
                                                 Toast.makeText(SignUpActivity.this, R.string.saved_confirmation, Toast.LENGTH_LONG).show();
+                                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent);
+
                                             } else {
+                                                mProgressBar.setVisibility(View.INVISIBLE);
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
-                                                builder.setMessage(R.string.posting_error_message)
+                                                builder.setMessage(e.getMessage())
                                                         .setTitle(R.string.attention_error_title)
                                                         .setPositiveButton(android.R.string.ok, null);
                                                 AlertDialog dialog = builder.create();
@@ -146,13 +187,9 @@ public class SignUpActivity extends ActionBarActivity {
                                     });
                                 }
 
-                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                            }
-                            else {
-                                AlertDialog.Builder builder= new AlertDialog.Builder(SignUpActivity.this);
+                            } else {
+                                mProgressBar.setVisibility(View.INVISIBLE);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                                 builder.setMessage(e.getMessage())
                                         .setTitle(R.string.sign_up_error_title)
                                         .setPositiveButton(android.R.string.ok, null);
@@ -204,7 +241,7 @@ public class SignUpActivity extends ActionBarActivity {
 
                         if (! mediaStorageDir.exists()){
                             if (! mediaStorageDir.mkdirs()){
-                               return null;
+                                return null;
                             }
                         }
 

@@ -50,16 +50,21 @@ public class PostActivity extends ActionBarActivity {
     protected LatLng mEventLatLng;
     protected double mLatitude;
     protected double mLongitude;
+    protected MenuItem mItem;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+    }
+
+    protected void onResume() {
+        super.onResume();
+
         mImageUri = getIntent().getData();
         ImageView imgView=(ImageView)findViewById(R.id.postImage);
         imgView.setImageURI(mImageUri);
-
 
         mMapButton = (Button)findViewById(R.id.mapbutton);
         mMapButton.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +116,8 @@ public class PostActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-          getMenuInflater().inflate(R.menu.menu_post, menu);
+        getMenuInflater().inflate(R.menu.menu_post, menu);
+        mItem = menu.findItem(R.id.action_post);
         return true;
     }
 
@@ -124,35 +130,45 @@ public class PostActivity extends ActionBarActivity {
                 return true;
 
             case R.id.action_post:
-                mEvent = (EditText)findViewById(R.id.eventField);
-                mPostEvent = mEvent.getText().toString();
-                mPostEvent = mPostEvent.trim();
+                posting();
+                return true;
 
-                mComment = (EditText)findViewById(R.id.commentField);
-                mPostComment = mComment.getText().toString();
-                mPostComment = mPostComment.trim();
-
-                mLocationField = (EditText)findViewById(R.id.locationField);
-                mPlaceShort = mLocationField.getText().toString();
-                mPlaceShort = mPlaceShort.trim();
-
-                ParseObject message = createMessage();
-                if (message == null) {
-                    // error
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage(R.string.posting_error_message)
-                            .setTitle(R.string.posting_error_message)
-                            .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                } else {
-                    send(message);
-                    finish();
-                }
-
+            case R.id.action_post_help:
+                Intent helpIntent = new Intent(this, PostHelpActivity.class);
+                startActivity(helpIntent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void posting() {
+        mItem.setVisible(false);
+
+        mEvent = (EditText)findViewById(R.id.eventField);
+        mPostEvent = mEvent.getText().toString();
+        mPostEvent = mPostEvent.trim();
+
+        mComment = (EditText)findViewById(R.id.commentField);
+        mPostComment = mComment.getText().toString();
+        mPostComment = mPostComment.trim();
+
+        mLocationField = (EditText)findViewById(R.id.locationField);
+        mPlaceShort = mLocationField.getText().toString();
+        mPlaceShort = mPlaceShort.trim();
+
+        ParseObject message = createMessage();
+        if (message == null) {
+            // error
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.posting_error_message)
+                    .setTitle(R.string.posting_error_message)
+                    .setPositiveButton(android.R.string.ok, null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } else {
+            send(message);
+            finish();
+        }
     }
 
     protected ParseObject createMessage(){

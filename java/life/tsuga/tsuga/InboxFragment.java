@@ -87,7 +87,7 @@ public class InboxFragment extends ListFragment {
         ParseQuery<ParseObject> query = new ParseQuery<>(ParseConstants.CLASS_EVENTS);
 
         query.whereContainedIn(ParseConstants.KEY_USER_ID, mRecipientsList);
-        query.setLimit(50);
+        query.setLimit(100);
         query.addDescendingOrder(ParseConstants.KEY_CREATED_AT);
         query.findInBackground(new FindCallback<ParseObject>() {
 

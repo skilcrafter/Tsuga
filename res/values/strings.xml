@@ -10,7 +10,7 @@
     <string name="email_hint">Email</string>
     <string name="empty_favorites_label">No Favorites Saved</string>
     <string name="empty_friends_label">No Friends Selected</string>
-    <string name="empty_inbox_label">No Messages</string>
+    <string name="empty_inbox_label">Please start by selecting users to follow from the overflow menu.</string>
     <string name="error_external_storage">There was a problem accessing your device\'s external storage.</string>
     <string name="error_title">We\'re sorry!</string>
     <string name="event_hint">Activity</string>
@@ -27,11 +27,12 @@
     <string name="login_button_label">Login</string>
     <string name="Login_error_message">Please make sure you enter a username, password!</string>
     <string name="Login_error_title">Attention!</string>
+    <string name="login_quote">“If you don\’t do it this year, you will be one year older when you do.” – Warren Miller</string>
     <string name="menu_all_users_label">All Users</string>
     <string name="menu_camera_label">Camera</string>
     <string name="menu_edit_friends_label">Edit Friends</string>
     <string name="menu_favorites_label">Favorites</string>
-    <string name="menu_post_label">Post</string>
+    <string name="menu_post_label">Share your adventure</string>
     <string name="menu_user_info">User Settings</string>
     <string name="no_connection">No Internet Connection Available!</string>
     <string name="ok_button">OK</string>
@@ -50,9 +51,10 @@
     <string name="search_friends_label">Search For Users</string>
     <string name="search_title">Search For Users</string>
     <string name="sign_up_button_label">Sign Up</string>
-    <string name="sign_up_error_message">Please make sure all fields are complete.</string>
+    <string name="sign_up_error_message">Please make sure all fields are complete and a picture has been uploaded.</string>
     <string name="sign_up_error_title">Attention!</string>
     <string name="signup_text">Signup</string>
+    <string name="signup_wait">This will take a minute. Please wait.</string>
     <string name="stop_following_user_button">Stop Following</string>
     <string name="submitted_by">By:</string>
     <string name="title_activity_all_users">All Users</string>
@@ -67,8 +69,9 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_places">Location</string>
-    <string name="title_activity_post">Post</string>
-    <string name="title_activity_search_friends">SearchFriendsActivity</string>
+    <string name="title_activity_post">Share your adventure</string>
+    <string name="title_activity_post_help">How to Post</string>
+    <string name="title_activity_search_friends">Search for users</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
     <string name="title_activity_sign_up">Sign Up!</string>
     <string name="title_activity_street_view">Street View</string>
@@ -81,5 +84,6 @@
         <item>Take Picture</item>
         <item>Choose Picture</item>
     </string-array>
+
 
 </resources>

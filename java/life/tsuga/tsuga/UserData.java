@@ -57,6 +57,7 @@ public class UserData extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_data);
+        mCurrentUser = ParseUser.getCurrentUser();
         setUserData();
     }
 
@@ -70,14 +71,12 @@ public class UserData extends ActionBarActivity {
         mLocation = (EditText)findViewById(R.id.locationField);
 
         if (isNetworkAvailable()){
-            mProgressBar.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.VISIBLE);
 
-        mCurrentUser = ParseUser.getCurrentUser();
         mCurrentUsername = mCurrentUser.getString(ParseConstants.KEY_CURRENT_USERNAME);
         mCurrentEmail = mCurrentUser.getString(ParseConstants.KEY_EMAIL);
         mCurrentName = mCurrentUser.getString(ParseConstants.KEY_PERSON_NAME);
         mCurrentLocation = mCurrentUser.getString(ParseConstants.KEY_PERSON_LOCATION);
-
         mParseImageFile = mCurrentUser.getParseFile(ParseConstants.KEY_IMAGE);
 
         if (mParseImageFile !=null){
@@ -88,66 +87,24 @@ public class UserData extends ActionBarActivity {
 
         mUsername.setText(mCurrentUsername);
         mEmail.setText(mCurrentEmail);
-
         mName.setText(mCurrentName);
         mLocation.setText(mCurrentLocation);
+
+        mImageUri = null;
 
         mUserPhotoButton = (Button)findViewById(R.id.userPictureButton);
         mUserPhotoButton.setOnClickListener(new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(UserData.this);
-        builder.setItems(R.array.camera_choices, mDialogListener);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+            photoButton();
           }
         });
 
         mSaveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-            String email = mEmail.getText().toString();
-            String name = mName.getText().toString();
-            String location = mLocation.getText().toString();
-                email = email.trim();
-                name = name.trim();
-                location = location.trim();
-
-            byte[]tMFileBytes = TMFileHelper.getByteArrayFromFile(UserData.this, mImageUri);
-            tMFileBytes = TMFileHelper.reduceImageForUpload(tMFileBytes);
-            String tMFileName = FileHelper.getFileName(UserData.this, mImageUri, mFileType);
-            ParseFile tMFile = new ParseFile(tMFileName, tMFileBytes);
-
-            byte[]fileBytes = FileHelper.getByteArrayFromFile(UserData.this, mImageUri);
-            fileBytes = FileHelper.reduceImageForUpload(fileBytes);
-            String fileName = FileHelper.getFileName(UserData.this, mImageUri,mFileType);
-            ParseFile file = new ParseFile(fileName, fileBytes);
-
-
-                mCurrentUser.put(ParseConstants.KEY_EMAIL, email);
-                mCurrentUser.put(ParseConstants.KEY_PERSON_NAME, name);
-                mCurrentUser.put(ParseConstants.KEY_PERSON_LOCATION, location);
-                mCurrentUser.put(ParseConstants.KEY_THUMBNAILIMAGE, tMFile);
-                mCurrentUser.put(ParseConstants.KEY_IMAGE,file);
-                mCurrentUser.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null){
-                            Toast.makeText(UserData.this, R.string.saved_confirmation, Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            AlertDialog.Builder builder = new AlertDialog.Builder(UserData.this);
-                            builder.setMessage(R.string.posting_error_message)
-                                    .setTitle(R.string.attention_error_title)
-                                    .setPositiveButton(android.R.string.ok, null);
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
-
-                        }
-                    }
-                });
+                saveButton();
             }
         });
 
@@ -156,6 +113,58 @@ public class UserData extends ActionBarActivity {
         else {
             Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void photoButton() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserData.this);
+        builder.setItems(R.array.camera_choices, mDialogListener);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void saveButton() {
+        String email = mEmail.getText().toString();
+        String name = mName.getText().toString();
+        String location = mLocation.getText().toString();
+        email = email.trim();
+        name = name.trim();
+        location = location.trim();
+
+        if (mImageUri!=null) {
+            byte[] tMFileBytes = TMFileHelper.getByteArrayFromFile(UserData.this, mImageUri);
+            tMFileBytes = TMFileHelper.reduceImageForUpload(tMFileBytes);
+            String tMFileName = FileHelper.getFileName(UserData.this, mImageUri, mFileType);
+            ParseFile tMFile = new ParseFile(tMFileName, tMFileBytes);
+           mCurrentUser.put(ParseConstants.KEY_THUMBNAILIMAGE, tMFile);
+          }
+
+        if (mImageUri !=null) {
+            byte[] fileBytes = FileHelper.getByteArrayFromFile(UserData.this, mImageUri);
+            fileBytes = FileHelper.reduceImageForUpload(fileBytes);
+            String fileName = FileHelper.getFileName(UserData.this, mImageUri, mFileType);
+            ParseFile file = new ParseFile(fileName, fileBytes);
+            mCurrentUser.put(ParseConstants.KEY_IMAGE, file);
+        }
+
+        mCurrentUser.put(ParseConstants.KEY_EMAIL, email);
+        mCurrentUser.put(ParseConstants.KEY_PERSON_NAME, name);
+        mCurrentUser.put(ParseConstants.KEY_PERSON_LOCATION, location);
+        mCurrentUser.saveInBackground(
+                new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Toast.makeText(UserData.this, R.string.saved_confirmation, Toast.LENGTH_LONG).show();
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(UserData.this);
+                            builder.setMessage(R.string.posting_error_message)
+                                    .setTitle(R.string.attention_error_title)
+                                    .setPositiveButton(android.R.string.ok, null);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    }
+                });
     }
 
 
